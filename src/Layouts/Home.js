@@ -6,11 +6,11 @@ import { Stack } from "@mui/material";
 export default function Home() {
     const [todos, setTodos] = useState([]);
     
-    //console.log(todos)
+   // console.log(todos)
   return (
-    <Stack alignItems="center" justifyContent="center" p="50px">
+    <Stack alignItems="center" justifyContent="center" p="40px">
           <TodoInput setTodos={setTodos} todos={todos} />
-      <TodoList />
+          <TodoList todos={todos} setTodos={setTodos} />
     </Stack>
   );
 }

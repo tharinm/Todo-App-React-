@@ -18,7 +18,7 @@ export default function TodoInput({ todos, setTodos }) {
       const newTodos = [...todos, newTodo];
       setTodos(newTodos);
       setInputValue(""); // clear the input field
-      console.log(inputValue);
+     // console.log(inputValue);
     } else {
       toast("Todo Can not be a blank", {
         icon: "😥",
@@ -28,7 +28,7 @@ export default function TodoInput({ todos, setTodos }) {
           color: "#fff",
         },
       });
-      console.log("empty");
+     // console.log("empty");
     }
 
     // console.log(setInputValue.length);
@@ -60,7 +60,7 @@ export default function TodoInput({ todos, setTodos }) {
         }}
         onClick={handleInput}
       >
-        Add Button
+        Add Todo
       </Button>
       <Box>
         <Toaster />
