@@ -1,21 +1,35 @@
 import React from "react";
-import { Box, Stack, Typography, Button } from "@mui/material";
+import { Stack, Typography, Button } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
-export default function SingleTodo({ todos, setTodos }) {
-  console.log(todos);
+export default function SingleTodo({ todos, setTodos, todo }) {
+ // console.log(todo.id);
+  // console.log(todos.id);
+
+  const handleDelete = () => {
+    const updateTodo = todos.filter((item) => {
+      if (item.id === todo.id) {
+        return false;
+      }
+      return true;
+      //  return console.log(item.id)
+    });
+    // console.log(updateTodo)
+    setTodos(updateTodo);
+  };
+
   return (
     <Stack
       justifyContent="space-between"
       alignItems="center"
       direction="row"
       mb="20px"
-          p="1px"
-          spacing={3}
+      p="1px"
+      spacing={3}
     >
       <Stack
         style={{
@@ -31,7 +45,6 @@ export default function SingleTodo({ todos, setTodos }) {
 
       <Stack
         width="150px"
-        bgColor="green"
         sx={{
           width: "400px",
           height: "60px",
@@ -40,7 +53,7 @@ export default function SingleTodo({ todos, setTodos }) {
         }}
         justifyContent="center"
       >
-        <Typography variant="h6">{todos.name}</Typography>
+        <Typography variant="h6">{todo.name}</Typography>
       </Stack>
       <Stack direction="row" gap="10px">
         <Button
@@ -60,6 +73,7 @@ export default function SingleTodo({ todos, setTodos }) {
             backgroundColor: "#ffc898",
             borderRadius: "10px",
           }}
+          onClick={handleDelete}
         >
           <DeleteIcon sx={{ color: "red" }} />
         </Button>
