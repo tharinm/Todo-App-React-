@@ -3,7 +3,7 @@ import { Stack, Typography, Button, TextField } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
@@ -32,20 +32,25 @@ export default function SingleTodo({ todos, setTodos, todo }) {
   };
 
   const handleEdit = () => {
-    setIsEdit(!isEdit);
-    //console.log("chek");
-
-    //setEditTodoName(todo.name);
-    toast("Please Press Enter After Editing !", {
-      icon: "🤠",
-    });
+    if (todo.isComplete === true) {
+      toast("Todo Already Completed!", {
+        icon: "😡",
+      });
+    } else {
+      setIsEdit(!isEdit);
+      //console.log("chek");
+      //setEditTodoName(todo.name);
+      toast("Please Press Enter After Editing !", {
+        icon: "🤠",
+      });
+    }
   };
 
   // console.log(isEdit);
 
   const hadleSubmit = (e) => {
     const value = editTodoName.length;
-
+    console.log(e)
     if (e.keyCode === 13) {
       //console.log(value);
       if (value > 0) {
@@ -87,20 +92,27 @@ export default function SingleTodo({ todos, setTodos, todo }) {
   const handleComplete = () => {
     const complete = todos.map((item) => {
       if (todo.id === item.id) {
+        toast("Good Job! You Completed One Todo", {
+          icon: "😍",
+          style: {
+            borderRadius: "10px",
+            background: "#333",
+            color: "#fff",
+          },
+        });
         return {
           ...item,
           isComplete: !item.isComplete,
         };
-      }
-      else {
+      } else {
         return item;
       }
     });
-    setTodos(complete)
+    setTodos(complete);
     console.log(complete);
   };
 
-     console.log(todo.isComplete);
+  //  console.log(todo.isComplete);
 
   return (
     <Stack
@@ -109,7 +121,8 @@ export default function SingleTodo({ todos, setTodos, todo }) {
       direction="row"
       mb="20px"
       p="1px"
-      spacing={3}
+      spacing={2}
+      sx={{ width: { xs: "350px", lg: "600px" } }}
     >
       <Stack
         style={{
@@ -118,15 +131,15 @@ export default function SingleTodo({ todos, setTodos, todo }) {
           backgroundColor: "#82cd47",
           borderRadius: "10px",
         }}
+        sx={{ width: { xs: "40px" }, height: { xs: "40px" } }}
         justifyContent="center"
       >
         <Checkbox {...label} color="success" onClick={handleComplete} />
       </Stack>
 
       <Stack
-        width="150px"
         sx={{
-          width: "400px",
+          width: { lg: "500px", xs: "400px" },
           height: "60px",
           backgroundColor: "#b3c99c",
           borderRadius: "10px",
@@ -144,18 +157,21 @@ export default function SingleTodo({ todos, setTodos, todo }) {
             onKeyDown={hadleSubmit}
           />
         ) : (
-         
-          <Typography variant="h6" style={{textDecorationLine:todo.isComplete ? 'line-through':'none'}}>
+          <Typography
+            variant="h6"
+            style={{
+              textDecorationLine: todo.isComplete ? "line-through" : "none",
+            }}
+          >
             {todo.name}
-            
           </Typography>
         )}
       </Stack>
       <Stack direction="row" gap="10px">
         <Button
           sx={{
-            width: "50px",
-            height: "50px",
+            width: { xs: "40px", lg: "50px" },
+            height: { xs: "50px", lg: "50px" },
             backgroundColor: "#b9eddd",
             borderRadius: "10px",
           }}

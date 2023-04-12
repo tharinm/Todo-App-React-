@@ -51,7 +51,7 @@ export default function TodoInput({ todos, setTodos }) {
         height="76px"
         sx={{
           input: { fontWeight: "700", border: "none", borderRadius: "4px" },
-          width: { lg: "400px", xs: "300px" },
+          width: { lg: "400px", xs: "200px" },
           backgroundColor: "#fff",
           borderRadius: "40px",
         }}
@@ -63,9 +63,9 @@ export default function TodoInput({ todos, setTodos }) {
         size="medium"
         sx={{
           backgroundColor: "#576cbc",
-          width: { lg: "173px", xs: "80px" },
+          width: { lg: "173px", xs: "90px" },
           height: "50px",
-          fontSize: { lg: "15px", xs: "14px" },
+          fontSize: { lg: "15px", xs: "10px" },
         }}
         onClick={handleInput}
       >
