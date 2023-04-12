@@ -8,6 +8,7 @@ export default function TodoInput({ todos, setTodos }) {
   //console.log(inputValue)
 
   const handleInput = () => {
+    
     if (inputValue.length > 0) {
       const newTodo = {
         id: v4(),
@@ -18,6 +19,14 @@ export default function TodoInput({ todos, setTodos }) {
       const newTodos = [...todos, newTodo];
       setTodos(newTodos);
       setInputValue(""); // clear the input field
+       toast("New Todo Added!", {
+         icon: "🚀",
+         style: {
+           borderRadius: "10px",
+           background: "#333",
+           color: "#fff",
+         },
+       });
      // console.log(inputValue);
     } else {
       toast("Todo Can not be a blank", {

@@ -9,7 +9,7 @@ const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 export default function SingleTodo({ todos, setTodos, todo }) {
   // console.log(todo.id);
-  console.log(todos);
+  //  console.log(todos);
 
   const [isEdit, setIsEdit] = useState(false);
   const [editTodoName, setEditTodoName] = useState("");
@@ -35,7 +35,10 @@ export default function SingleTodo({ todos, setTodos, todo }) {
     setIsEdit(!isEdit);
     //console.log("chek");
 
-    setEditTodoName(todo.name);
+    //setEditTodoName(todo.name);
+    toast("Please Press Enter After Editing !", {
+      icon: "🤠",
+    });
   };
 
   // console.log(isEdit);
@@ -47,21 +50,21 @@ export default function SingleTodo({ todos, setTodos, todo }) {
       //console.log(value);
       if (value > 0) {
         // console.log("empty");
-         const newTodos = todos.map((item) => {
-           if (todo.id === item.id) {
-             return {
-               ...item,
-               name: editTodoName,
-             };
-           } else {
-             return item;
-           }
-         });
-         setTodos(newTodos);
-         setIsEdit(false);
-         toast("Todo Updated Successfully!", {
-           icon: "🙂",
-         });
+        const newTodos = todos.map((item) => {
+          if (todo.id === item.id) {
+            return {
+              ...item,
+              name: editTodoName,
+            };
+          } else {
+            return item;
+          }
+        });
+        setTodos(newTodos);
+        setIsEdit(false);
+        toast("Todo Updated Successfully!", {
+          icon: "👏",
+        });
       } else {
         toast("Todo Can not be a blank", {
           icon: "😥",
@@ -78,23 +81,26 @@ export default function SingleTodo({ todos, setTodos, todo }) {
   const handleChange = (e) => {
     setEditTodoName(e.target.value);
   };
+
   //Todo Complete
-  // const handleComplete = () => {
-  // const completeTodo = todos.map((item) => {
-  // if (item.id === todo.id) {
-  // return {
-  // isCompleted: !item.isCompleted,
-  //
-  // }
 
-  // }
-  // else {
-  // return item
-  // }
-  // });
-  // setTodos(completeTodo)
+  const handleComplete = () => {
+    const complete = todos.map((item) => {
+      if (todo.id === item.id) {
+        return {
+          ...item,
+          isComplete: !item.isComplete,
+        };
+      }
+      else {
+        return item;
+      }
+    });
+    setTodos(complete)
+    console.log(complete);
+  };
 
-  // };
+     console.log(todo.isComplete);
 
   return (
     <Stack
@@ -114,7 +120,7 @@ export default function SingleTodo({ todos, setTodos, todo }) {
         }}
         justifyContent="center"
       >
-        <Checkbox {...label} color="success" />
+        <Checkbox {...label} color="success" onClick={handleComplete} />
       </Stack>
 
       <Stack
@@ -138,7 +144,11 @@ export default function SingleTodo({ todos, setTodos, todo }) {
             onKeyDown={hadleSubmit}
           />
         ) : (
-          <Typography variant="h6">{todo.name}</Typography>
+         
+          <Typography variant="h6" style={{textDecorationLine:todo.isComplete ? 'line-through':'none'}}>
+            {todo.name}
+            
+          </Typography>
         )}
       </Stack>
       <Stack direction="row" gap="10px">
