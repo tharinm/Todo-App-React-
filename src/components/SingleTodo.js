@@ -50,7 +50,7 @@ export default function SingleTodo({ todos, setTodos, todo }) {
 
   const hadleSubmit = (e) => {
     const value = editTodoName.length;
-    console.log(e)
+    console.log(e);
     if (e.keyCode === 13) {
       //console.log(value);
       if (value > 0) {
@@ -145,6 +145,8 @@ export default function SingleTodo({ todos, setTodos, todo }) {
           borderRadius: "10px",
         }}
         justifyContent="center"
+       
+       
       >
         {isEdit ? (
           <TextField
@@ -155,6 +157,8 @@ export default function SingleTodo({ todos, setTodos, todo }) {
             sx={{ backgroundColor: "white" }}
             onChange={handleChange}
             onKeyDown={hadleSubmit}
+            multiline
+            maxRows={4}
           />
         ) : (
           <Typography

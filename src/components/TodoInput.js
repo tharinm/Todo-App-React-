@@ -52,11 +52,14 @@ export default function TodoInput({ todos, setTodos }) {
         sx={{
           input: { fontWeight: "700", border: "none", borderRadius: "4px" },
           width: { lg: "400px", xs: "200px" },
+
           backgroundColor: "#fff",
           borderRadius: "40px",
         }}
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
+        multiline
+        maxRows={4}
       />
       <Button
         variant="contained"
