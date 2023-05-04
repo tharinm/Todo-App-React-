@@ -145,8 +145,6 @@ export default function SingleTodo({ todos, setTodos, todo }) {
           borderRadius: "10px",
         }}
         justifyContent="center"
-       
-       
       >
         {isEdit ? (
           <TextField
@@ -166,6 +164,7 @@ export default function SingleTodo({ todos, setTodos, todo }) {
             style={{
               textDecorationLine: todo.isComplete ? "line-through" : "none",
             }}
+            sx={{ fontSize: { xs: "0.8rem", md: "6rem" } }}
           >
             {todo.name}
           </Typography>
